@@ -33,7 +33,6 @@ extern "C" _declspec(dllexport) void generate(const char* filename, int renderTy
 
 	resize_image(src);
 
-	namedWindow("Display frame", WINDOW_NORMAL);
 	Mat img;
 
 	if (renderTypeEnum == render_type::Edge_Preserve_Smoothing_Normalized_Convolution_Filter)
