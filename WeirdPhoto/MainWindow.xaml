@@ -1,0 +1,18 @@
+﻿<Window x:Class="WeirdPhoto.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeirdPhoto"
+        mc:Ignorable="d"
+        Title="Weird Photo" Height="350" Width="525">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\Paul\Documents\ocean.jpg"/>
+        </Grid.Background>
+        <Button x:Name="generate_button" Content="Generate" HorizontalAlignment="Left" Margin="226,276,0,0" VerticalAlignment="Top" Width="75" Click="generate_button_click"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="32" Margin="120,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="288" IsReadOnly="True"/>
+        <Button x:Name="browse_button" Content="Browse..." HorizontalAlignment="Left" Margin="120,81,0,0" VerticalAlignment="Top" Width="75" Click="browse_button_click"/>
+
+    </Grid>
+</Window>
