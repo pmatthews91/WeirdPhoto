@@ -31,12 +31,13 @@ namespace WeirdPhoto
         private static class NativeMethods
         {
             [DllImport("ModelWeirdPhoto.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void generate(string dims);
+            public static extern void generate(string filename, int renderType);
         }
 
         private void generate_button_click(object sender, RoutedEventArgs e)
         {
-            NativeMethods.generate(textBox.Text);
+            var renderType = comboBox.SelectedIndex;
+            NativeMethods.generate(textBox.Text, renderType);
         }
 
         private void browse_button_click(object sender, RoutedEventArgs e)

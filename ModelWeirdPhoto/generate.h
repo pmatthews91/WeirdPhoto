@@ -20,9 +20,9 @@ enum class render_type
 
 void resize_image(Mat& src);
 
-extern "C" _declspec(dllexport) void generate(const char* filename)
+extern "C" _declspec(dllexport) void generate(const char* filename, int renderType)
 {
-	render_type renderType = render_type::Stylization;
+	render_type renderTypeEnum = static_cast<render_type>(renderType);
 	Mat src = imread(filename, IMREAD_COLOR);
 
 	if (src.empty())
@@ -36,39 +36,39 @@ extern "C" _declspec(dllexport) void generate(const char* filename)
 	namedWindow("Display frame", WINDOW_NORMAL);
 	Mat img;
 
-	if (renderType == render_type::Edge_Preserve_Smoothing_Normalized_Convolution_Filter)
+	if (renderTypeEnum == render_type::Edge_Preserve_Smoothing_Normalized_Convolution_Filter)
 	{
 		edgePreservingFilter(src, img, 1);
 		imshow("Edge Preserve Smoothing Convolution Filter", img);
 	}
 
-	if (renderType == render_type::Edge_Preserve_Smoothing_Recursive_Filter)
+	if (renderTypeEnum == render_type::Edge_Preserve_Smoothing_Recursive_Filter)
 	{
 		edgePreservingFilter(src, img, 2);
 		imshow("Edge Preserve Smoothing Recursive Filter", img);
 	}
 
-	if (renderType == render_type::Detail_Enhancement)
+	if (renderTypeEnum == render_type::Detail_Enhancement)
 	{
 		detailEnhance(src, img);
 		imshow("Detail Enhanced", img);
 	}
 
-	if (renderType == render_type::Pencil_Sketch_Grey)
+	if (renderTypeEnum == render_type::Pencil_Sketch_Grey)
 	{
 		Mat img1;
 		pencilSketch(src, img1, img, 10, 0.1f, 0.03f);
 		imshow("Pencil Sketch", img1);
 	}
 
-	if (renderType == render_type::Pencil_Sketch_Colour)
+	if (renderTypeEnum == render_type::Pencil_Sketch_Colour)
 	{
 		Mat img1;
 		pencilSketch(src, img1, img, 10, 0.1f, 0.03f);
 		imshow("Color Pencil Sketch", img);
 	}
 
-	if(renderType == render_type::Stylization)
+	if(renderTypeEnum == render_type::Stylization)
 	{
 		stylization(src, img);
 		imshow("Stylization", img);
