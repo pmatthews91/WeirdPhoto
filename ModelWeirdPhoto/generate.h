@@ -4,6 +4,7 @@
 #include "opencv2/photo.hpp"
 #include "opencv2/imgproc.hpp"
 #include "opencv2/highgui.hpp"
+#include <windows.h>
 
 using namespace cv;
 
@@ -17,6 +18,8 @@ enum class render_type
 	Stylization
 };
 
+void resize_image(Mat& src);
+
 extern "C" _declspec(dllexport) void generate(const char* filename)
 {
 	render_type renderType = render_type::Stylization;
@@ -28,7 +31,8 @@ extern "C" _declspec(dllexport) void generate(const char* filename)
 		return;
 	}
 
-	resize(src, src, Size(src.cols / 2, src.rows / 2));
+	resize_image(src);
+
 	namedWindow("Display frame", WINDOW_NORMAL);
 	Mat img;
 
