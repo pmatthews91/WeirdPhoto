@@ -1,6 +1,7 @@
 #include "ImageRenderer.h"
 #include "opencv2/highgui.hpp"
 #include "opencv2/photo.hpp"
+#include "OpenFileException.h"
 #include <windows.h>
 
 using namespace cv;
@@ -10,7 +11,7 @@ ImageRenderer::ImageRenderer(const char* filename, RenderType renderType)
 {
 	if (m_sourceImage.empty())
 	{
-		throw std::exception{ "File could not be opened" };
+		throw OpenFileException{};
 	}
 
 	resize_image();
