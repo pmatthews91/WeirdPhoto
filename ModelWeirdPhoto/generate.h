@@ -7,57 +7,64 @@
 
 using namespace cv;
 
-extern "C" _declspec(dllexport) void generate(const char* filename) // unsigned char* dst, int dimension, char* filename
+enum class render_type
 {
-	int num = 1;
-	int type = 1;
+	Edge_Preserve_Smoothing_Normalized_Convolution_Filter,
+	Edge_Preserve_Smoothing_Recursive_Filter,
+	Detail_Enhancement,
+	Pencil_Sketch_Grey,
+	Pencil_Sketch_Colour,
+	Stylization
+};
+
+extern "C" _declspec(dllexport) void generate(const char* filename)
+{
+	render_type renderType = render_type::Stylization;
 	Mat src = imread(filename, IMREAD_COLOR);
 
 	if (src.empty())
 	{
-		//cout << "Could not open or find the image!\n" << endl;
-		//cout << "Usage: " << argv[0] << " <Input image>" << endl;
+		// Could not find image
 		return;
 	}
 
-	/*cout << endl;
-	cout << " Edge Preserve Filter" << endl;
-	cout << "----------------------" << endl;
-
-	cout << "Options: " << endl;
-	cout << endl;
-
-	cout << "1) Edge Preserve Smoothing" << endl;
-	cout << "   -> Using Normalized convolution Filter" << endl;
-	cout << "   -> Using Recursive Filter" << endl;
-	cout << "2) Detail Enhancement" << endl;
-	cout << "3) Pencil sketch/Color Pencil Drawing" << endl;
-	cout << "4) Stylization" << endl;
-	cout << endl;*/
-
+	resize(src, src, Size(src.cols / 2, src.rows / 2));
+	namedWindow("Display frame", WINDOW_NORMAL);
 	Mat img;
 
-	if (num == 1)
+	if (renderType == render_type::Edge_Preserve_Smoothing_Normalized_Convolution_Filter)
 	{
-		//cout << "Press 1 for Normalized Convolution Filter and 2 for Recursive Filter: ";
-
-		edgePreservingFilter(src, img, type);
-		imshow("Edge Preserve Smoothing", img);
-
+		edgePreservingFilter(src, img, 1);
+		imshow("Edge Preserve Smoothing Convolution Filter", img);
 	}
-	else if (num == 2)
+
+	if (renderType == render_type::Edge_Preserve_Smoothing_Recursive_Filter)
+	{
+		edgePreservingFilter(src, img, 2);
+		imshow("Edge Preserve Smoothing Recursive Filter", img);
+	}
+
+	if (renderType == render_type::Detail_Enhancement)
 	{
 		detailEnhance(src, img);
 		imshow("Detail Enhanced", img);
 	}
-	else if (num == 3)
+
+	if (renderType == render_type::Pencil_Sketch_Grey)
 	{
 		Mat img1;
 		pencilSketch(src, img1, img, 10, 0.1f, 0.03f);
 		imshow("Pencil Sketch", img1);
+	}
+
+	if (renderType == render_type::Pencil_Sketch_Colour)
+	{
+		Mat img1;
+		pencilSketch(src, img1, img, 10, 0.1f, 0.03f);
 		imshow("Color Pencil Sketch", img);
 	}
-	else if (num == 4)
+
+	if(renderType == render_type::Stylization)
 	{
 		stylization(src, img);
 		imshow("Stylization", img);
