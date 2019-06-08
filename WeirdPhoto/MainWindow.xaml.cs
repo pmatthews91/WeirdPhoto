@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Win32;
+using System.Runtime.InteropServices;
 
 namespace WeirdPhoto
 {
@@ -27,9 +28,15 @@ namespace WeirdPhoto
             InitializeComponent();
         }
 
+        private static class NativeMethods
+        {
+            [DllImport("ModelWeirdPhoto.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void generate(string dims);
+        }
+
         private void generate_button_click(object sender, RoutedEventArgs e)
         {
-            // Dispatch to C++ here
+            NativeMethods.generate(textBox.Text);
         }
 
         private void browse_button_click(object sender, RoutedEventArgs e)
