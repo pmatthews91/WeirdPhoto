@@ -1,13 +1,14 @@
 #pragma once
 
+#include "IRenderer.h"
 #include "RenderType.h"
 #include "opencv2/imgproc.hpp"
 
-class ImageRenderer
+class ImageRenderer : public IRenderer
 {
 public:
 	ImageRenderer(const char* filename, RenderType renderType);
-	void render_image();
+	void render() override;
 
 private:
 	void resize_image();

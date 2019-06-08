@@ -17,7 +17,7 @@ ImageRenderer::ImageRenderer(const char* filename, RenderType renderType)
 	resize_image();
 }
 
-void ImageRenderer::render_image()
+void ImageRenderer::render()
 {
 	Mat img;
 

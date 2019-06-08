@@ -31,13 +31,16 @@ namespace WeirdPhoto
         private static class NativeMethods
         {
             [DllImport("ModelWeirdPhoto.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void generate(string filename, int renderType);
+            public static extern void generate_image(string filename, int renderType);
+
+            [DllImport("ModelWeirdPhoto.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void generate_video(int renderType);
         }
 
         private void generate_button_click(object sender, RoutedEventArgs e)
         {
             var renderType = comboBox.SelectedIndex;
-            NativeMethods.generate(textBox.Text, renderType);
+            NativeMethods.generate_image(textBox.Text, renderType);
         }
 
         private void browse_button_click(object sender, RoutedEventArgs e)
@@ -50,6 +53,12 @@ namespace WeirdPhoto
 
             if (openFileDialog.ShowDialog() == true)
                 textBox.Text = openFileDialog.FileName;
+        }
+
+        private void webcam_button_click(object sender, RoutedEventArgs e)
+        {
+            var renderType = comboBox.SelectedIndex;
+            NativeMethods.generate_video(renderType);
         }
     }
 }

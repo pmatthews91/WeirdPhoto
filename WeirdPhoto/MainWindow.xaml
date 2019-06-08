@@ -10,10 +10,10 @@
         <Grid.Background>
             <ImageBrush ImageSource="Resources\ocean.jpg"/>
         </Grid.Background>
-        <Button x:Name="generate_button" Content="Generate" HorizontalAlignment="Left" Margin="164,37,0,0" VerticalAlignment="Top" Width="75" Click="generate_button_click"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="32" Margin="-9,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" IsReadOnly="True"/>
-        <Button x:Name="browse_button" Content="Browse..." HorizontalAlignment="Left" Margin="0,37,0,0" VerticalAlignment="Top" Width="75" Click="browse_button_click"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="0,61,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+        <Button x:Name="generate_button" Content="Generate" HorizontalAlignment="Left" Margin="164,88,0,0" VerticalAlignment="Top" Width="75" Click="generate_button_click"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="32" Margin="-9,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" IsReadOnly="True"/>
+        <Button x:Name="browse_button" Content="Browse..." HorizontalAlignment="Left" Margin="0,88,0,0" VerticalAlignment="Top" Width="75" Click="browse_button_click"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" SelectedIndex="0">
             <ComboBoxItem>
                 <TextBlock>Convolution Filter</TextBlock>
             </ComboBoxItem>
@@ -33,5 +33,6 @@
                 <TextBlock>Stylization</TextBlock>
             </ComboBoxItem>
         </ComboBox>
+        <Button x:Name="webcam_button" Content="Webcam" HorizontalAlignment="Left" Margin="0,187,0,0" VerticalAlignment="Top" Width="75" Click="webcam_button_click"/>
     </Grid>
 </Window>
