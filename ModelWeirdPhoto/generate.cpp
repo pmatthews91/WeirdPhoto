@@ -1,24 +1,11 @@
 #include "generate.h"
+#include "ImageRenderer.h"
+#include "RenderType.h"
 
-void resize_image(Mat& src)
+void generate(const char* filename, int renderType)
 {
-	auto screenWidth = (int)GetSystemMetrics(SM_CXSCREEN);
-	auto screenHeight = (int)GetSystemMetrics(SM_CYSCREEN);
+	RenderType renderTypeEnum = static_cast<RenderType>(renderType);
 
-	int newWidth = src.cols;
-	int newHeight = src.rows;
-
-	if (src.cols > screenWidth)
-	{
-		newHeight = newHeight * screenWidth / newWidth;
-		newWidth = screenWidth;
-	}
-
-	if (newHeight > screenHeight)
-	{
-		newWidth = newWidth * screenHeight / newHeight;
-		newHeight = screenHeight;
-	}
-
-	resize(src, src, Size(newWidth, newHeight));
+	ImageRenderer renderer{ filename, renderTypeEnum };
+	renderer.render_image();
 }

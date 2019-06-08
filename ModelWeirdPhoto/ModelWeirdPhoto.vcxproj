@@ -154,9 +154,12 @@ xcopy "$(OPENCV_DIR)\bin\opencv_world410d.pdb" "$(OutDir)" /y</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="generate.cpp" />
+    <ClCompile Include="ImageRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="generate.h" />
+    <ClInclude Include="ImageRenderer.h" />
+    <ClInclude Include="RenderType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
