@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeirdPhoto"
         mc:Ignorable="d"
-        Title="Weird Photo" Height="350" Width="525">
-    <Grid>
+        Title="Weird Photo" Height="259.888" Width="383.955">
+    <Grid Height="232" Width="377">
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Paul\Documents\ocean.jpg"/>
+            <ImageBrush ImageSource="Resources\ocean.jpg"/>
         </Grid.Background>
-        <Button x:Name="generate_button" Content="Generate" HorizontalAlignment="Left" Margin="226,276,0,0" VerticalAlignment="Top" Width="75" Click="generate_button_click"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="32" Margin="120,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="288" IsReadOnly="True"/>
-        <Button x:Name="browse_button" Content="Browse..." HorizontalAlignment="Left" Margin="120,81,0,0" VerticalAlignment="Top" Width="75" Click="browse_button_click"/>
-
+        <Button x:Name="generate_button" Content="Generate" HorizontalAlignment="Left" Margin="238,68,0,0" VerticalAlignment="Top" Width="75" Click="generate_button_click"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="32" Margin="65,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" IsReadOnly="True"/>
+        <Button x:Name="browse_button" Content="Browse..." HorizontalAlignment="Left" Margin="65,68,0,0" VerticalAlignment="Top" Width="75" Click="browse_button_click"/>
     </Grid>
 </Window>
