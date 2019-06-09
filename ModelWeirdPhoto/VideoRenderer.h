@@ -11,6 +11,6 @@ public:
 	void render() override;
 
 private:
-	RenderType m_renderType;
+	ViewImageFunc m_viewFunc;
 	cv::VideoCapture m_video;
 };

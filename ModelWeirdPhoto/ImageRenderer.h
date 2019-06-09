@@ -2,7 +2,6 @@
 
 #include "IRenderer.h"
 #include "RenderType.h"
-#include "opencv2/imgproc.hpp"
 
 class ImageRenderer : public IRenderer
 {
@@ -13,6 +12,6 @@ public:
 private:
 	void resize_image();
 
-	RenderType m_renderType;
+	ViewImageFunc m_viewFunc;
 	cv::Mat m_sourceImage;
 };

@@ -1,13 +1,13 @@
 #include "VideoRenderer.h"
 #include <opencv2/core.hpp>
-
 #include <opencv2/videoio.hpp>
 #include "OpenWebCamException.h"
+#include "ViewFunctionFactory.h"
 
 using namespace cv;
 
 VideoRenderer::VideoRenderer(RenderType renderType)
-	: m_renderType(renderType), m_video()
+	: m_video()
 {
 	// open the default camera using default API
 	m_video.open(0);
@@ -16,6 +16,8 @@ VideoRenderer::VideoRenderer(RenderType renderType)
 	{
 		throw OpenWebCamException{};
 	}
+
+	m_viewFunc = ViewFunctionFactory::make_view_func(renderType);
 }
 
 void VideoRenderer::render()
@@ -24,16 +26,18 @@ void VideoRenderer::render()
 	
 	for (;;)
 	{
-		// wait for a new frame from camera and store it into 'frame'
+		// Wait for a new frame from camera and store it in 'frame'
 		m_video.read(frame);
 
-		// check if we succeeded
+		// Check if we succeeded
 		if (frame.empty()) {
 			// Error - blank frame grabbed
 			break;
 		}
-		// show live and wait for a key with timeout long enough to show images
-		imshow("Live", frame);
+		// Show live
+		m_viewFunc(frame);
+
+		// Wait for a key with timeout long enough to show images
 		if (waitKey(1000) >= 0)
 			break;
 	}

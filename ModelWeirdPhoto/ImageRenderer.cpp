@@ -2,62 +2,27 @@
 #include "opencv2/highgui.hpp"
 #include "opencv2/photo.hpp"
 #include "OpenFileException.h"
+#include "ViewFunctionFactory.h"
 #include <windows.h>
 
 using namespace cv;
 
 ImageRenderer::ImageRenderer(const char* filename, RenderType renderType)
-	: m_renderType(renderType), m_sourceImage(imread(filename, IMREAD_COLOR))
+	: m_sourceImage(imread(filename, IMREAD_COLOR))
 {
 	if (m_sourceImage.empty())
 	{
 		throw OpenFileException{};
 	}
 
+	m_viewFunc = ViewFunctionFactory::make_view_func(renderType);
+
 	resize_image();
 }
 
 void ImageRenderer::render()
 {
-	Mat img;
-
-	if (m_renderType == RenderType::Edge_Preserve_Smoothing_Normalized_Convolution_Filter)
-	{
-		edgePreservingFilter(m_sourceImage, img, 1);
-		imshow("Edge Preserve Smoothing Convolution Filter", img);
-	}
-
-	if (m_renderType == RenderType::Edge_Preserve_Smoothing_Recursive_Filter)
-	{
-		edgePreservingFilter(m_sourceImage, img, 2);
-		imshow("Edge Preserve Smoothing Recursive Filter", img);
-	}
-
-	if (m_renderType == RenderType::Detail_Enhancement)
-	{
-		detailEnhance(m_sourceImage, img);
-		imshow("Detail Enhanced", img);
-	}
-
-	if (m_renderType == RenderType::Pencil_Sketch_Grey)
-	{
-		Mat img1;
-		pencilSketch(m_sourceImage, img1, img, 10, 0.1f, 0.03f);
-		imshow("Pencil Sketch", img1);
-	}
-
-	if (m_renderType == RenderType::Pencil_Sketch_Colour)
-	{
-		Mat img1;
-		pencilSketch(m_sourceImage, img1, img, 10, 0.1f, 0.03f);
-		imshow("Color Pencil Sketch", img);
-	}
-
-	if (m_renderType == RenderType::Stylization)
-	{
-		stylization(m_sourceImage, img);
-		imshow("Stylization", img);
-	}
+	m_viewFunc(m_sourceImage);
 }
 
 void ImageRenderer::resize_image()
