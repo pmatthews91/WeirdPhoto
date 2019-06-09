@@ -13,4 +13,5 @@ public:
 private:
 	ViewImageFunc m_viewFunc;
 	cv::VideoCapture m_video;
+	int m_waitTime = 100;
 };

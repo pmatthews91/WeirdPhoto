@@ -38,7 +38,7 @@ void VideoRenderer::render()
 		m_viewFunc(frame);
 
 		// Wait for a key with timeout long enough to show images
-		if (waitKey(1000) >= 0)
+		if (waitKey(m_waitTime) >= 0)
 			break;
 	}
 }
